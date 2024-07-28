@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/seu-app.jar /app/seu-app.jar
 
 # Expor a porta que o aplicativo vai usar
-EXPOSE 8080
+EXPOSE 
 
 # Comando para executar o JAR
 CMD ["java", "-jar", "/app/seu-app.jar"]

@@ -1,6 +1,5 @@
 package br.com.church.manager.server.server.curso;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +29,7 @@ public class CursoService {
         curso.setNome(cursoDetails.getNome());
         return cursoRepository.save(curso);
     }
+
 
     public void deleteCurso(Long id) {
         cursoRepository.deleteById(id);

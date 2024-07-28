@@ -22,8 +22,12 @@ public class PessoaService {
         return pessoaRepository.save(pessoa);
     }
 
+
     public Optional<Pessoa> getPessoaById(Long id) {
         return pessoaRepository.findById(id);
+    }
+    public List<Pessoa> getAniversariantesDoMes(int mes) {
+        return pessoaRepository.findAniversariantesDoMes(mes);
     }
 
     public List<Pessoa> getAllPessoas() {
@@ -38,6 +42,10 @@ public class PessoaService {
 
     public void deletePessoa(Long id) {
         pessoaRepository.deleteById(id);
+    }
+
+    public List<Pessoa> getPessoasByCursoId(Long id) {
+        return pessoaRepository.findPessoasByCursoId(id);
     }
 
     public Pessoa addCursoToPessoa(Long pessoaId, Long cursoId) {

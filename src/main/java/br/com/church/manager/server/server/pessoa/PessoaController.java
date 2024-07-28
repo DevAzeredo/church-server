@@ -17,6 +17,10 @@ public class PessoaController {
     public ResponseEntity<Pessoa> createPessoa(@RequestBody Pessoa pessoa) {
         return ResponseEntity.ok(pessoaService.createPessoa(pessoa));
     }
+    @GetMapping("/aniversariantes")
+    public ResponseEntity<List<Pessoa>> getAniversariantesDoMes(@RequestParam int mes) {
+        return ResponseEntity.ok(pessoaService.getAniversariantesDoMes(mes));
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Pessoa> getPessoaById(@PathVariable Long id) {
@@ -24,7 +28,10 @@ public class PessoaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Pessoa>> getAllPessoas() {
+    public ResponseEntity<List<Pessoa>> getAllPessoas(@RequestParam(required = false) Long cursoId) {
+        if (cursoId != null) {
+            return ResponseEntity.ok(pessoaService.getPessoasByCursoId(cursoId));
+        }
         return ResponseEntity.ok(pessoaService.getAllPessoas());
     }
 
@@ -38,6 +45,7 @@ public class PessoaController {
         pessoaService.deletePessoa(id);
         return ResponseEntity.noContent().build();
     }
+
 
     @PutMapping("/{pessoaId}/addCurso/{cursoId}")
     public ResponseEntity<Pessoa> addCursoToPessoa(@PathVariable Long pessoaId, @PathVariable Long cursoId) {
