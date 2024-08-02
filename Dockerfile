@@ -1,15 +1,9 @@
-# Usar uma imagem base do OpenJDK
 FROM openjdk:17-jdk-slim
 
-# Definir o diretório de trabalho
 WORKDIR /app
 
-# Copiar o arquivo JAR para o diretório de trabalho
-COPY target/seu-app.jar /app/seu-app.jar
+COPY target/server.jar /app/server.jar
 
-# Expor a porta que o aplicativo vai usar
-EXPOSE 
+EXPOSE 9090
 
-# Comando para executar o JAR
-CMD ["java", "-jar", "/app/seu-app.jar"]
-
+CMD ["java", "-jar", "/app/server.jar"]

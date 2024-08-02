@@ -2,6 +2,7 @@ package br.com.church.manager.server.server.curso;
 
 import br.com.church.manager.server.server.pessoa.Pessoa;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -28,49 +29,11 @@ public class Curso {
     private String descricao;
 
     @Column(nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate data;
 
     @ManyToMany(mappedBy = "cursos")
     @JsonIgnore
     private Set<Pessoa> pessoas = new HashSet<>();
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
-
-    public Set<Pessoa> getPessoas() {
-        return pessoas;
-    }
-
-    public void setPessoas(Set<Pessoa> pessoas) {
-        this.pessoas = pessoas;
-    }
 }

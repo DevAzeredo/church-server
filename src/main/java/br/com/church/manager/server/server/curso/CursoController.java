@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/cursos")
@@ -26,7 +25,10 @@ public class CursoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Curso>> getAllCursos() {
+    public ResponseEntity<List<Curso>> getAllCursos(@RequestParam(required = false) Integer pessoaId) {
+        if (pessoaId != null) {
+            return ResponseEntity.ok(cursoService.getPessoasByCursoId(pessoaId));
+        }
         return ResponseEntity.ok(cursoService.getAllCursos());
     }
 

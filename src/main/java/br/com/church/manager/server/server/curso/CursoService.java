@@ -1,5 +1,6 @@
 package br.com.church.manager.server.server.curso;
 
+import br.com.church.manager.server.server.pessoa.Pessoa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,10 @@ public class CursoService {
 
     public Curso createCurso(Curso curso) {
         return cursoRepository.save(curso);
+    }
+
+    public List<Curso> getPessoasByCursoId(Integer id) {
+        return cursoRepository.findCursosByPessoaId(id);
     }
 
     public Optional<Curso> getCursoById(Long id) {
