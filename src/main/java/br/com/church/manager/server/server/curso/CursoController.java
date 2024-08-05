@@ -25,12 +25,17 @@ public class CursoController {
         return cursoService.getCursoById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
+
     @GetMapping
     public ResponseEntity<List<Curso>> getAllCursos(@RequestParam(required = false) Integer pessoaId) {
         if (pessoaId != null) {
             return ResponseEntity.ok(cursoService.getPessoasByCursoId(pessoaId));
         }
         return ResponseEntity.ok(cursoService.getAllCursos());
+    }
+    @GetMapping("/proximos")
+    public ResponseEntity<List<Curso>> getNextCursos(@RequestParam(defaultValue = "5") int limit) {
+        return ResponseEntity.ok(cursoService.getProximosCursos(limit));
     }
 
     @PutMapping("/{id}")

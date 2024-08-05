@@ -4,8 +4,11 @@ import br.com.church.manager.server.server.pessoa.Pessoa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CursoService {
@@ -21,6 +24,14 @@ public class CursoService {
         return cursoRepository.findCursosByPessoaId(id);
     }
 
+    public List<Curso> getProximosCursos(int limit) {
+        LocalDate today = LocalDate.now();
+        return cursoRepository.findAll().stream()
+                .filter(curso -> curso.getData().isAfter(today))
+                .sorted(Comparator.comparing(Curso::getData))
+                .limit(limit)
+                .collect(Collectors.toList());
+    }
     public Optional<Curso> getCursoById(Long id) {
         return cursoRepository.findById(id);
     }
